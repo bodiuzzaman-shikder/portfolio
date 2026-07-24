@@ -184,6 +184,13 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; font-weight: 700; 
   position: absolute; inset: 0; border: 2px solid var(--accent); border-radius: var(--radius);
   transform: translate(14px, 14px); z-index: 0;
 }
+.work-snap { position: relative; margin-top: 2rem; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+.work-snap img { width: 100%; height: 200px; object-fit: cover; object-position: center 30%; display: block; }
+.work-snap figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; padding: .6rem .9rem;
+  font-size: .78rem; color: #fff; font-weight: 500;
+  background: linear-gradient(transparent, rgba(10,16,32,.9));
+}
 .about-text p { color: var(--text-dim); margin-bottom: 1.1rem; }
 .about-text strong { color: var(--text); font-weight: 600; }
 .about-subhead { margin: 1.8rem 0 1rem; font-size: 1.15rem; color: var(--text); }
