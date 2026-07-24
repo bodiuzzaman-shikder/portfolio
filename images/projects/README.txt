@@ -10,4 +10,5 @@ gradient + icon if the image is missing):
   mars-rover.jpg     → UIU Mars Rover URC Utah USA
   cansat.jpg         → UIU CanSat 2025 USA
 
+
 Recommended size: about 800×500 px (landscape). JPG or PNG both work.
