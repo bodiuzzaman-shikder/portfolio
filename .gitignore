@@ -6,3 +6,8 @@ desktop.ini
 *.log
 ~$*
 .vscode/
+
+# ⛔ PRIVATE — never publish. Personal source material, IDs, CVs, raw docs.
+# This folder is a working resource only and must stay OUT of the public repo.
+Personal Data files/
+

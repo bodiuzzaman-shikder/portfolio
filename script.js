@@ -8,9 +8,9 @@
 const TYPEWRITER_PHRASES = [
   'Electrical & Mechanical Design Engineer',
   'R&D Researcher',
-  'Power Systems Specialist',
+  'Switchgear & Transformer Designer',
   'Robotics & Mechatronics Engineer',
-  'Top-5 Worldwide — URC 2024'
+  'SOLIDWORKS Champion'
 ];
 
 /* ─────────────── Typewriter effect ─────────────── */
@@ -41,16 +41,33 @@ const TYPEWRITER_PHRASES = [
   tick();
 })();
 
-/* ─────────────── Navbar scroll state ─────────────── */
+/* ─────────────── Navbar scroll state + progress bar ─────────────── */
 const navbar = document.getElementById('navbar');
 const backToTop = document.getElementById('backToTop');
+const scrollProgress = document.getElementById('scrollProgress');
 
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
   navbar.classList.toggle('scrolled', y > 40);
   backToTop.classList.toggle('show', y > 500);
+  if (scrollProgress) {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    scrollProgress.style.width = (docH > 0 ? (y / docH) * 100 : 0) + '%';
+  }
   updateActiveLink();
 });
+
+/* ─────────────── Show all certificates toggle ─────────────── */
+const showMoreCerts = document.getElementById('showMoreCerts');
+if (showMoreCerts) {
+  showMoreCerts.addEventListener('click', () => {
+    const gallery = document.getElementById('certGallery');
+    const expanded = gallery.classList.toggle('expanded');
+    showMoreCerts.textContent = expanded ? 'Show fewer ▴' : 'Show all certificates ▾';
+    // reveal any newly-shown cards immediately
+    gallery.querySelectorAll('.gcard-more.reveal').forEach(el => el.classList.add('visible'));
+  });
+}
 
 /* ─────────────── Mobile menu toggle ─────────────── */
 const navToggle = document.getElementById('navToggle');
