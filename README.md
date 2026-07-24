@@ -4,7 +4,7 @@ Personal portfolio of **Md. Bodiuzzaman Shikder**, Design Engineer (R&D) at
 Adex Engineering Ltd., Bangladesh — Electrical & Mechanical Design Engineer and
 R&D Researcher (power systems, robotics, mechatronics, sustainable energy).
 
-🔗 **Live site:** https://USERNAME.github.io/portfolio/  *(update after you publish)*
+🔗 **Live site:** https://bodiuzzaman-shikder.github.io/portfolio/
 
 ## Built with
 Plain HTML, CSS and JavaScript — no build step, no frameworks. Just open
