@@ -260,11 +260,20 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; font-weight: 700; 
 .cert-card {
   background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
   padding: 1.8rem 1.4rem; text-align: center; transition: transform .3s, border-color .3s, box-shadow .3s;
+  display: block; color: inherit;
 }
 .cert-card:hover { transform: translateY(-6px); border-color: rgba(59,130,246,.4); box-shadow: var(--shadow); }
 .cert-icon { font-size: 2.6rem; margin-bottom: .8rem; }
 .cert-card h3 { font-size: 1.15rem; color: var(--accent); margin-bottom: .5rem; }
 .cert-card p { color: var(--text-dim); font-size: .88rem; }
+/* "View certificate" hint — only on clickable (anchor) cert cards */
+.cert-view {
+  display: inline-block; margin-top: 1rem; font-size: .8rem; font-weight: 600;
+  color: var(--accent); opacity: 0; transform: translateY(4px);
+  transition: opacity .3s, transform .3s;
+}
+a.cert-card:hover .cert-view { opacity: 1; transform: none; }
+@media (hover: none) { .cert-view { opacity: 1; transform: none; } }
 
 /* ─────────────────── International ─────────────────── */
 .intl-timeline { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; }
