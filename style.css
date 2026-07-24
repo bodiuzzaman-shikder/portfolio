@@ -7,17 +7,17 @@
 
 :root {
   /* --- Brand colors (edit these) --- */
-  --bg:        #0a1020;   /* deep premium navy background     */
-  --bg-alt:    #0e1729;   /* alternating section background   */
-  --card:      #131d33;   /* card surface                     */
-  --card-2:    #17233f;   /* raised card surface              */
-  --accent:    #3b82f6;   /* electric blue accent             */
-  --accent-2:  #60a5fa;   /* lighter blue                     */
-  --accent-3:  #22d3ee;   /* cyan highlight for gradients     */
+  --bg:        #0e1728;   /* readable premium navy background */
+  --bg-alt:    #14203a;   /* alternating section background   */
+  --card:      #1c2b47;   /* card surface (lighter, readable) */
+  --card-2:    #243553;   /* raised card surface              */
+  --accent:    #4f97ff;   /* electric blue accent (brighter)  */
+  --accent-2:  #7db4ff;   /* lighter blue                     */
+  --accent-3:  #38d6ee;   /* cyan highlight for gradients     */
   --gold:      #fbbf24;   /* award / honour accent            */
-  --text:      #eef2fb;   /* main near-white text             */
-  --text-dim:  #9aa7bd;   /* muted grey text                  */
-  --border:    rgba(148,163,184,.14);
+  --text:      #f7faff;   /* bright near-white text           */
+  --text-dim:  #bcc8dd;   /* readable muted text              */
+  --border:    rgba(160,178,208,.22);
 
   /* --- Typography --- */
   --font-head: 'Sora', system-ui, sans-serif;
@@ -91,7 +91,7 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; font-weight: 700; 
 .nav-inner { display: flex; align-items: center; justify-content: space-between; }
 .logo { font-family: var(--font-head); font-weight: 800; font-size: 1.4rem; letter-spacing: -.5px; }
 .logo span { color: var(--accent); }
-.nav-links { display: flex; gap: 1.6rem; align-items: center; }
+.nav-links { display: flex; gap: 1.15rem; align-items: center; }
 .nav-links a { font-size: .92rem; font-weight: 500; color: var(--text-dim); transition: color .2s; position: relative; }
 .nav-links a:hover, .nav-links a.active { color: var(--text); }
 .nav-links a::after {
@@ -450,6 +450,21 @@ a.cert-card:hover .cert-view { opacity: 1; transform: none; }
 .gcard-badge h3 { color: var(--gold); font-size: 1.1rem; }
 /* All certificate cards visible by default */
 .gcard-more { display: flex; }
+/* Logo/badge cards: show the whole logo, not a crop */
+.gcard-img.contain { background: #fff; }
+.gcard-img.contain img { object-fit: contain; padding: 14px; }
+
+/* ── Simulation & Analysis gallery ── */
+.sim-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.6rem; }
+.sim-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; color: inherit; transition: transform .3s, box-shadow .3s, border-color .3s;
+}
+.sim-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: rgba(79,151,255,.45); }
+.sim-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; }
+.sim-cap { padding: 1.1rem 1.3rem 1.4rem; }
+.sim-cap h3 { font-size: 1.05rem; margin-bottom: .35rem; }
+.sim-cap p { color: var(--text-dim); font-size: .88rem; }
 
 /* ── Leadership ── */
 .lead-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; }
@@ -474,9 +489,9 @@ a.cert-card:hover .cert-view { opacity: 1; transform: none; }
 body::before {
   content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(closest-side at 18% 22%, rgba(59,130,246,.16), transparent),
-    radial-gradient(closest-side at 82% 30%, rgba(34,211,238,.10), transparent),
-    radial-gradient(closest-side at 60% 85%, rgba(99,102,241,.12), transparent);
+    radial-gradient(closest-side at 18% 22%, rgba(79,151,255,.10), transparent),
+    radial-gradient(closest-side at 82% 30%, rgba(56,214,238,.06), transparent),
+    radial-gradient(closest-side at 60% 85%, rgba(99,102,241,.08), transparent);
   background-size: 60% 60%, 55% 55%, 65% 65%;
   background-repeat: no-repeat;
   animation: driftBg 22s ease-in-out infinite alternate;
@@ -534,12 +549,21 @@ body::before {
   .hero { min-height: auto; padding-top: 1rem; }
   .section, .highlights { padding: 1rem 0 !important; page-break-inside: avoid; }
   .reveal { opacity: 1 !important; transform: none !important; }
-  .gcard-img, .project-media { height: auto; }
-  .project-card, .gcard, .mini-card, .cert-card, .lead-card, .research-card, .ref-card, .intl-item {
-    box-shadow: none !important; border: 1px solid #ddd !important; break-inside: avoid;
+  /* Make every card image render fully in the PDF (no cropping / no absolute positioning) */
+  .project-media, .gcard-img { height: auto !important; min-height: 0 !important; display: block !important; background: #fff !important; }
+  .project-media img, .gcard-img img, .sim-card img {
+    position: static !important; width: 100% !important; height: auto !important;
+    object-fit: contain !important; max-height: 340px; page-break-inside: avoid;
+  }
+  .project-media::after, .gcard-img.noimg::after { display: none !important; }
+  .projects-grid, .cert-gallery, .sim-gallery, .skills-grid, .more-projects,
+  .lead-grid, .research-grid, .intl-timeline, .cert-grid { display: block !important; }
+  .project-card, .gcard, .mini-card, .cert-card, .lead-card, .research-card, .ref-card, .intl-item, .sim-card {
+    box-shadow: none !important; border: 1px solid #ccc !important; break-inside: avoid; margin-bottom: 14px;
   }
   a { color: #111 !important; text-decoration: none; }
   #international::before { display: none; }
+  .gcard-view, .project-tools { color: #555 !important; }
 }
 
 /* Respect reduced-motion preference */
