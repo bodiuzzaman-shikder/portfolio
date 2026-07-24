@@ -1,0 +1,8 @@
+# OS / editor / cloud-sync junk — keep the repo clean
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
+~$*
+.vscode/
