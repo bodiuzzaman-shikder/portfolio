@@ -57,17 +57,23 @@ window.addEventListener('scroll', () => {
   updateActiveLink();
 });
 
-/* ─────────────── Show all certificates toggle ─────────────── */
-const showMoreCerts = document.getElementById('showMoreCerts');
-if (showMoreCerts) {
-  showMoreCerts.addEventListener('click', () => {
-    const gallery = document.getElementById('certGallery');
-    const expanded = gallery.classList.toggle('expanded');
-    showMoreCerts.textContent = expanded ? 'Show fewer ▴' : 'Show all certificates ▾';
-    // reveal any newly-shown cards immediately
-    gallery.querySelectorAll('.gcard-more.reveal').forEach(el => el.classList.add('visible'));
-  });
+/* ─────────────── Save Portfolio as PDF (browser print → Save as PDF) ─────────────── */
+const downloadPortfolio = document.getElementById('downloadPortfolio');
+if (downloadPortfolio) {
+  downloadPortfolio.addEventListener('click', () => window.print());
 }
+
+/* ─────────────── Staggered reveal (children animate one-by-one) ─────────────── */
+document.querySelectorAll(
+  '.projects-grid, .more-projects, .cert-gallery, .skills-grid, .lead-grid, ' +
+  '.research-grid, .intl-timeline, .highlights-grid, .contact-cards, .cert-grid'
+).forEach(group => {
+  Array.from(group.children).forEach((child, i) => {
+    if (child.classList.contains('reveal')) {
+      child.classList.add('stagger-' + ((i % 6) + 1));
+    }
+  });
+});
 
 /* ─────────────── Mobile menu toggle ─────────────── */
 const navToggle = document.getElementById('navToggle');

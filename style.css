@@ -70,6 +70,10 @@ h1, h2, h3 { font-family: var(--font-head); line-height: 1.2; font-weight: 700; 
   background: transparent;
 }
 .btn-outline:hover { background: rgba(59,130,246,.12); transform: translateY(-3px); }
+.btn-ghost {
+  background: rgba(255,255,255,.04); border: 1.5px solid var(--border); color: var(--text-dim);
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--accent); transform: translateY(-3px); }
 .btn-lg { padding: 1.05rem 2.6rem; font-size: 1.05rem; }
 
 /* ─────────────────── Navbar ─────────────────── */
@@ -444,10 +448,8 @@ a.cert-card:hover .cert-view { opacity: 1; transform: none; }
 .gcard-badge-icon { font-size: 3rem; margin-bottom: .6rem; }
 .gcard-badge .gcard-body { padding: 0; }
 .gcard-badge h3 { color: var(--gold); font-size: 1.1rem; }
-/* Hidden extra certs until "show all" */
-.gcard-more { display: none; }
-.cert-gallery.expanded .gcard-more { display: flex; }
-.show-more-wrap { text-align: center; margin-top: 2rem; }
+/* All certificate cards visible by default */
+.gcard-more { display: flex; }
 
 /* ── Leadership ── */
 .lead-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem; }
@@ -468,14 +470,80 @@ a.cert-card:hover .cert-view { opacity: 1; transform: none; }
 .ref-org { color: var(--text-dim); font-size: .86rem; }
 .ref-note { color: var(--text-dim); font-size: .84rem; margin-top: 1.2rem; font-style: italic; }
 
+/* ── Animated ambient background (dynamic premium feel) ── */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(closest-side at 18% 22%, rgba(59,130,246,.16), transparent),
+    radial-gradient(closest-side at 82% 30%, rgba(34,211,238,.10), transparent),
+    radial-gradient(closest-side at 60% 85%, rgba(99,102,241,.12), transparent);
+  background-size: 60% 60%, 55% 55%, 65% 65%;
+  background-repeat: no-repeat;
+  animation: driftBg 22s ease-in-out infinite alternate;
+}
+@keyframes driftBg {
+  0%   { background-position: 0% 0%, 100% 0%, 50% 100%; }
+  100% { background-position: 20% 15%, 75% 20%, 40% 80%; }
+}
+
+/* ── Certificate backdrop for International section ── */
+#international { position: relative; overflow: hidden; }
+#international::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: url('images/awards/urc-2023.jpg') center/cover no-repeat;
+  opacity: .05; filter: grayscale(1);
+}
+#international .container { position: relative; z-index: 1; }
+
+/* ── Contact form ── */
+.contact-form { max-width: 620px; margin: 0 auto; text-align: left; display: flex; flex-direction: column; gap: 1rem; }
+.contact-form .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.contact-form input, .contact-form textarea {
+  width: 100%; padding: .9rem 1.1rem; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--card); color: var(--text); font-family: var(--font-body); font-size: .95rem;
+  transition: border-color .25s, box-shadow .25s;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: var(--text-dim); }
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(59,130,246,.18);
+}
+.contact-form textarea { resize: vertical; }
+.contact-form .btn { align-self: center; margin-top: .3rem; cursor: pointer; }
+@media (max-width: 560px) { .contact-form .form-row { grid-template-columns: 1fr; } }
+
+/* ── Staggered reveal (children animate one-by-one) ── */
+.reveal.stagger-1 { transition-delay: .08s; }
+.reveal.stagger-2 { transition-delay: .16s; }
+.reveal.stagger-3 { transition-delay: .24s; }
+.reveal.stagger-4 { transition-delay: .32s; }
+.reveal.stagger-5 { transition-delay: .40s; }
+.reveal.stagger-6 { transition-delay: .48s; }
+
 /* ── Responsive tweaks for new components ── */
 @media (max-width: 480px) {
   .highlight { justify-content: flex-start; }
   .quick-facts { padding: 1rem; }
 }
 
+/* ── Print / "Save Portfolio as PDF" — clean light layout ── */
+@media print {
+  :root { --bg:#fff; --bg-alt:#fff; --card:#fff; --text:#111; --text-dim:#444; --border:#ccc; }
+  body { background:#fff; color:#111; }
+  body::before, #scrollProgress, .navbar, .nav-toggle, #backToTop,
+  .hero-actions, .scroll-hint, .contact-form, .work-snap { display: none !important; }
+  .hero { min-height: auto; padding-top: 1rem; }
+  .section, .highlights { padding: 1rem 0 !important; page-break-inside: avoid; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .gcard-img, .project-media { height: auto; }
+  .project-card, .gcard, .mini-card, .cert-card, .lead-card, .research-card, .ref-card, .intl-item {
+    box-shadow: none !important; border: 1px solid #ddd !important; break-inside: avoid;
+  }
+  a { color: #111 !important; text-decoration: none; }
+  #international::before { display: none; }
+}
+
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
-  * { animation: none !important; transition: none !important; }
+  *, body::before { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }

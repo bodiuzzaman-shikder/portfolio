@@ -65,7 +65,8 @@
     <div class="hero-actions reveal">
       <a href="#projects" class="btn btn-primary">View My Work</a>
       <!-- ✏️ EDIT: put your CV file at assets/cv.pdf (or change the link) -->
-      <a href="assets/cv.pdf" class="btn btn-outline" download>Download CV</a>
+      <a href="assets/cv.pdf" class="btn btn-outline" download="Bodiuzzaman Shikder's CV.pdf">Download CV</a>
+      <button type="button" class="btn btn-ghost" id="downloadPortfolio" title="Save this whole portfolio as a PDF">Save Portfolio as PDF</button>
     </div>
 
     <!-- Stat counters -->
@@ -267,11 +268,14 @@
           <img src="images/projects/ct-software.jpg" alt="Transformer Design Software MATLAB" onerror="this.remove()">
         </div>
         <div class="project-body">
-          <span class="project-tag">Engineering Software</span>
-          <h3>Transformer Design Software v3.5</h3>
-          <p>In-house MATLAB GUI that automates transformer &amp; CT design — core, winding, turns,
-             tank and thickness sizing with accuracy-class verification and instant reporting.</p>
-          <div class="project-tools">MATLAB · App Designer · Electromagnetics</div>
+          <span class="project-tag">Engineering Software · MATLAB</span>
+          <h3>CT / Transformer Design Software v3.5</h3>
+          <p>Self-developed MATLAB GUI (to <strong>IEC 61869-2</strong>) that fully automates
+             current-transformer and transformer design. Seven tabs — Summary/Datasheet, 3D Core
+             Geometry, Phasor Diagram, Accuracy Verification, Short-circuit Check,
+             Simulink/Equivalent Circuit and Reference Notes — with live "design passes" validation
+             and one-click export to FEA, Simulink, BOM (xlsx), datasheet PDF and CSV.</p>
+          <div class="project-tools">MATLAB · App Designer · IEC 61869-2 · Electromagnetics</div>
         </div>
       </article>
 
@@ -286,6 +290,20 @@
              transformers: tank and radiator design, cooling calculation and full manufacturing
              documentation.</p>
           <div class="project-tools">SOLIDWORKS · MATLAB · Thermal Design</div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-media" data-icon="🔋">
+          <img src="images/projects/db-box.jpg" alt="16-Way Distribution Board (DB Box)" onerror="this.remove()">
+        </div>
+        <div class="project-body">
+          <span class="project-tag">Power Distribution</span>
+          <h3>16-Way Distribution Board (DB)</h3>
+          <p>Full mechanical design of a 16-way low-voltage distribution board enclosure for Adex —
+             sheet-metal housing, hinged viewing window, busbar layout and IP-rated door, modelled
+             and rendered in SOLIDWORKS.</p>
+          <div class="project-tools">SOLIDWORKS · Sheet Metal · Rendering</div>
         </div>
       </article>
 
@@ -441,9 +459,6 @@
         <div class="gcard-body"><h3>Power Plant O&amp;M Training</h3><p>Power &amp; Energy Training Academy (PETA), UIU.</p><span class="gcard-view">View ↗</span></div>
       </a>
     </div>
-    <div class="show-more-wrap">
-      <button class="btn btn-outline" id="showMoreCerts">Show all certificates ▾</button>
-    </div>
   </div>
 </section>
 
@@ -570,7 +585,22 @@
         <span class="contact-value">Dhaka, Bangladesh</span>
       </div>
     </div>
-    <a href="mailto:bodiuzzamanswug@gmail.com" class="btn btn-primary btn-lg reveal">Say Hello</a>
+    <!-- ✏️ Functional contact form. Messages go to your email via FormSubmit.
+         IMPORTANT: the FIRST time someone submits, FormSubmit emails YOU a one-time
+         "Activate Form" link — click it once and all future messages arrive in your inbox. -->
+    <form class="contact-form reveal" action="https://formsubmit.co/bodiuzzamanswug@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="New message from your portfolio website">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="https://bodiuzzaman-shikder.github.io/portfolio/#contact">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Your name" required>
+        <input type="email" name="email" placeholder="Your email" required>
+      </div>
+      <input type="text" name="subject" placeholder="Subject (optional)">
+      <textarea name="message" rows="5" placeholder="Write your message…" required></textarea>
+      <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+    </form>
   </div>
 </section>
 
