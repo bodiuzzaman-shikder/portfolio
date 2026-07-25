@@ -63,6 +63,17 @@ if (downloadPortfolio) {
   downloadPortfolio.addEventListener('click', () => window.print());
 }
 
+/* ─────────────── Contact form: assemble the destination email at runtime ───────────────
+   The address is built from parts here (not written in the HTML) so email-harvesting
+   bots that only read the page source cannot scrape it. */
+(function wireContactForm() {
+  const form = document.getElementById('contactForm');
+  if (!form) return;
+  const user = 'bodiuzzamanswug';
+  const domain = 'gmail.com';
+  form.action = 'https://formsubmit.co/' + user + '@' + domain;
+})();
+
 /* ─────────────── Staggered reveal (children animate one-by-one) ─────────────── */
 document.querySelectorAll(
   '.projects-grid, .more-projects, .cert-gallery, .skills-grid, .lead-grid, ' +

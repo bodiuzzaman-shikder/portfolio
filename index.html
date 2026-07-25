@@ -65,8 +65,7 @@
     </p>
     <div class="hero-actions reveal">
       <a href="#projects" class="btn btn-primary">View My Work</a>
-      <!-- ✏️ EDIT: put your CV file at assets/cv.pdf (or change the link) -->
-      <a href="assets/cv.pdf" class="btn btn-outline" download="Bodiuzzaman Shikder's CV.pdf">Download CV</a>
+      <a href="#contact" class="btn btn-outline">Request My CV</a>
       <button type="button" class="btn btn-ghost" id="downloadPortfolio" title="Save this whole portfolio as a PDF">Save Portfolio as PDF</button>
     </div>
 
@@ -585,31 +584,25 @@
       engineering roles worldwide. My inbox is always open.
     </p>
     <div class="contact-cards reveal">
-      <a href="mailto:bodiuzzamanswug@gmail.com" class="contact-card">
-        <span class="contact-icon">✉️</span>
-        <span class="contact-label">Email</span>
-        <span class="contact-value">bodiuzzamanswug@gmail.com</span>
-      </a>
       <a href="https://www.linkedin.com/in/md-bodiuzzaman-shikder-0a72861a1/" target="_blank" rel="noopener" class="contact-card">
         <span class="contact-icon">💼</span>
         <span class="contact-label">LinkedIn</span>
         <span class="contact-value">Connect with me</span>
       </a>
-      <a href="tel:+8801521584992" class="contact-card">
-        <span class="contact-icon">📞</span>
-        <span class="contact-label">Phone</span>
-        <span class="contact-value">+880 1521-584992</span>
-      </a>
+      <div class="contact-card">
+        <span class="contact-icon">✉️</span>
+        <span class="contact-label">Message</span>
+        <span class="contact-value">Use the form below</span>
+      </div>
       <div class="contact-card">
         <span class="contact-icon">📍</span>
         <span class="contact-label">Location</span>
         <span class="contact-value">Dhaka, Bangladesh</span>
       </div>
     </div>
-    <!-- ✏️ Functional contact form. Messages go to your email via FormSubmit.
-         IMPORTANT: the FIRST time someone submits, FormSubmit emails YOU a one-time
-         "Activate Form" link — click it once and all future messages arrive in your inbox. -->
-    <form class="contact-form reveal" action="https://formsubmit.co/bodiuzzamanswug@gmail.com" method="POST">
+    <!-- Functional contact form. The destination email is assembled in script.js at
+         runtime (not in the HTML source) so email-harvesting bots cannot scrape it. -->
+    <form class="contact-form reveal" id="contactForm" method="POST">
       <input type="hidden" name="_subject" value="New message from your portfolio website">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="table">
